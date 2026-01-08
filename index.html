@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farès IFRAH – Portfolio</title>
+
+    <!-- Google Font : Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0e0f12;
+            --bg-soft: #15171c;
+            --card: #1c1f26;
+            --text: #e6e6e6;
+            --text-muted: #a0a4ad;
+            --accent: #7c83ff;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        header {
+            padding: 100px 20px 80px;
+            text-align: center;
+            background: radial-gradient(circle at top, #1a1d25, var(--bg));
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            margin-top: 12px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: background 0.3s, border 0.3s;
+        }
+
+        .contact-links a:hover {
+            background: var(--card);
+            border-color: var(--accent);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        section {
+            margin-bottom: 100px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+        }
+
+        .about-content,
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 40px;
+        }
+
+        .about-content p {
+            margin-bottom: 18px;
+            color: var(--text-muted);
+        }
+
+        .competences-grid,
+        .sae-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .competence-card h3,
+        .sae-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .sae-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+        }
+
+        .semester-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .sae-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-content,
+            .card,
+            .sae-card {
+                padding: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Farès IFRAH</h1>
+    <p>Étudiant BUT MMI · Graphiste Freelance</p>
+    <div class="contact-links">
+        <a href="mailto:ifrahfares@yahoo.fr">Email</a>
+        <a href="tel:0769586488">Téléphone</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Portfolio</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <section>
+        <h2>À propos</h2>
+        <div class="about-content">
+            <p>Graphiste freelance depuis 2022, je conçois des identités visuelles et supports de communication à l’aide d’outils comme Photoshop, Illustrator, After Effects et Figma.</p>
+            <p>Actuellement en BUT Métiers du Multimédia et de l’Internet à l’IUT de Cergy-Pontoise, je développe une approche complète mêlant design, développement web et stratégie de communication.</p>
+            <p>Bilingue anglais, autonome et curieux, je m’intéresse particulièrement aux projets mêlant créativité et technique.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Compétences</h2>
+        <div class="competences-grid">
+            <div class="competence-card card">
+                <h3>Design</h3>
+                <ul>
+                    <li>Photoshop</li>
+                    <li>Illustrator</li>
+                    <li>After Effects</li>
+                    <li>Figma</li>
+                    <li>Identité visuelle</li>
+                </ul>
+            </div>
+            <div class="competence-card card">
+                <h3>Développement</h3>
+                <ul>
+                    <li>HTML / CSS / JavaScript</li>
+                    <li>PHP / SQL</li>
+                    <li>MySQL</li>
+                    <li>VS Code</li>
+                    <li>Hébergement FTP</li>
+                </ul>
+            </div>
+            <div class="competence-card card">
+                <h3>Communication</h3>
+                <ul>
+                    <li>Stratégie digitale</li>
+                    <li>Gestion de projet</li>
+                    <li>Audit numérique</li>
+                    <li>Vidéo & réseaux sociaux</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Projets SAE</h2>
+        <div class="sae-grid">
+            <div class="sae-card">
+                <span class="semester-tag">Semestre 1</span>
+                <h3>Audit de communication – Hermès</h3>
+                <p>Analyse UX, SEO et accessibilité d’un site web avec recommandations stratégiques.</p>
+            </div>
+            <div class="sae-card">
+                <span class="semester-tag">Semestre 2</span>
+                <h3>Site web dynamique PHP / MySQL</h3>
+                <p>Création d’un back-office sécurisé avec gestion CRUD des contenus.</p>
+                <p><a href="https://sae-203.alwaysdata.net/SAE203/code/" target="_blank">Voir le projet →</a></p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section>
+        <h2>Expérience</h2>
+        <div class="about-content">
+            <h3>Graphiste Freelance</h3>
+            <p style="color: var(--text-muted); margin-bottom: 16px;">2022 — aujourd’hui</p>
+            <p>Création de logos, identités visuelles et supports de communication pour différents clients.</p>
+
+            <h3 style="margin-top: 30px;">Stage – Centr’Aide</h3>
+            <p style="color: var(--text-muted); margin-bottom: 16px;">Avril – Mai 2024</p>
+            <p>Réalisation de maquettes et développement web pour une association d’aide sociale.</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 Farès IFRAH — BUT MMI · IUT de Cergy-Pontoise</p>
+</footer>
+
+</body>
+</html>
