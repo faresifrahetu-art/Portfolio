@@ -17,7 +17,7 @@
             --card: #1c1f26;
             --text: #e6e6e6;
             --text-muted: #a0a4ad;
-            --accent: #7c83ff;
+            --accent: #ff3155;
             --border: rgba(255,255,255,0.08);
         }
 
@@ -32,17 +32,112 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 49, 85, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 60%, rgba(255, 49, 85, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 49, 85, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: screen;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 49, 85, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+            opacity: 0;
+            left: var(--mouse-x, 50%);
+            top: var(--mouse-y, 50%);
+        }
+
+        body.mouse-active::after {
+            opacity: 1;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 49, 85, 0.3);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--drift));
+                opacity: 0;
+            }
+        }
+
+        .container,
+        header,
+        footer {
+            position: relative;
         }
 
         a {
             color: var(--accent);
             text-decoration: none;
+            text-shadow: 0 0 10px rgba(255, 49, 85, 0.4);
         }
 
         header {
             padding: 100px 20px 80px;
             text-align: center;
             background: radial-gradient(circle at top, #1a1d25, var(--bg));
+            position: relative;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 49, 85, 0.1) 0%, transparent 70%);
+            pointer-events: none;
         }
 
         header h1 {
@@ -77,6 +172,7 @@
         .contact-links a:hover {
             background: var(--card);
             border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(255, 49, 85, 0.3);
         }
 
         .container {
@@ -94,6 +190,7 @@
             font-weight: 600;
             margin-bottom: 40px;
             letter-spacing: -0.5px;
+            text-shadow: 0 0 30px rgba(255, 49, 85, 0.3);
         }
 
         .about-content,
@@ -102,6 +199,12 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 40px;
+            transition: box-shadow 0.3s;
+        }
+
+        .about-content:hover,
+        .card:hover {
+            box-shadow: 0 0 30px rgba(255, 49, 85, 0.15);
         }
 
         .about-content p {
@@ -146,6 +249,12 @@
             border: 1px solid var(--border);
             border-radius: 14px;
             padding: 32px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        .sae-card:hover {
+            box-shadow: 0 0 30px rgba(255, 49, 85, 0.2);
+            transform: translateY(-2px);
         }
 
         .semester-tag {
@@ -155,6 +264,7 @@
             text-transform: uppercase;
             color: var(--accent);
             margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 49, 85, 0.5);
         }
 
         .sae-card p {
@@ -187,14 +297,16 @@
 
 <body>
 
+<div class="particles" id="particles"></div>
+
 <header>
     <h1>Farès IFRAH</h1>
     <p>Étudiant BUT MMI · Graphiste Freelance</p>
     <div class="contact-links">
         <a href="mailto:ifrahfares@yahoo.fr">Email</a>
         <a href="tel:0769586488">Téléphone</a>
-        <a href="https://www.linkedin.com/in/far%C3%A8s-ifrah/" target="_blank">LinkedIn</a>
-        <a href="https://www.behance.net/ffrequence" target="_blank">Portfolio</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Portfolio</a>
     </div>
 </header>
 
@@ -326,6 +438,71 @@
     <p>© 2026 Farès IFRAH — BUT MMI · IUT de Cergy-Pontoise</p>
 </footer>
 
+<script>
+    const body = document.body;
+    const glowElement = document.querySelector('body::after');
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        body.classList.add('mouse-active');
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        body.classList.remove('mouse-active');
+    });
+    
+    function animate() {
+        currentX += (mouseX - currentX) * 0.1;
+        currentY += (mouseY - currentY) * 0.1;
+        
+        body.style.setProperty('--mouse-x', currentX + 'px');
+        body.style.setProperty('--mouse-y', currentY + 'px');
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+
+    // Création des particules
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const startX = Math.random() * window.innerWidth;
+        const drift = (Math.random() - 0.5) * 100;
+        const duration = 15 + Math.random() * 20;
+        const delay = Math.random() * 5;
+        const size = 1 + Math.random() * 2;
+        
+        particle.style.left = startX + 'px';
+        particle.style.bottom = '-10px';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.animationDuration = duration + 's';
+        particle.style.animationDelay = delay + 's';
+        particle.style.setProperty('--drift', drift + 'px');
+        
+        particlesContainer.appendChild(particle);
+        
+        setTimeout(() => {
+            particle.remove();
+            createParticle();
+        }, (duration + delay) * 1000);
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+        createParticle();
+    }
+</script>
+
 </body>
 </html>
-
